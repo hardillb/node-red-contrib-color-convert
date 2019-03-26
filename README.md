@@ -27,6 +27,8 @@ For the first 3 input modes the node will attempt to determine the input format 
 
 For the CSS input mode the msg.payload should be a string containing the name of a CSS color.
 
+For HSV and HSL inputs the "Scale Sat/Bri/Val" check box will convert values from 0-1 to 0-100
+
 ### Outputs
 
 Output type can be configured to be either a 3 element array, an object or a string. The 3 element array will contian the 
