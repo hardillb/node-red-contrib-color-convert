@@ -21,7 +21,7 @@
       </select>
   </div>
   <div class="form-row">
-      <label for="node--input-output"><i class="icon-tag"></i> Output</label>
+      <label for="node-input-output"><i class="icon-tag"></i> Output</label>
       <select id="node-input-output">
         <option value="rgb">RGB</option>
         <option value="hsl">HSL</option>
@@ -96,10 +96,12 @@
         $('#node-input-output').change(function(){
           if ($('#node-input-output option:selected').val() !== 'css') {
             $('#node-input-outputType').prop('disabled', false);
-            $('#node-input-outputType').val('array');
+            //$('#node-input-outputType').val('array');
+            console.log("foo")
           } else {
             $('#node-input-outputType').prop('disabled', true);
             $('#node-input-outputType').val('string');
+            console.log("bar")
           }
         });
 
