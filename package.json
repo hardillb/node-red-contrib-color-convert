@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-color-convert",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Node-RED node to convert between Color representations (e.g. RGB to HSV)",
   "node-red": {
     "nodes": {

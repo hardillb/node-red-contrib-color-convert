@@ -1,5 +1,6 @@
 /**
  * Copyright 2017 IBM Corp.
+ * Copyright 2019 Ben Hardill
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,11 +123,18 @@
                   responseValue = convertColor.hsv.keyword(input);
                   break;
               }
-              if (node.outputType === 'object') {
+              if (node.outputType === 'object' && node.output === 'hsl') {
                 var obj = {
                   hue: responseValue[0],
                   saturation: responseValue[1],
                   value: responseValue[2]
+                };
+                responseValue = obj;
+              } else if (node.outputType === 'object' && node.output === 'rgb') {
+                var obj = {
+                  red: responseValue[0],
+                  green: responseValue[1],
+                  blue: responseValue[2]
                 };
                 responseValue = obj;
               } else if (node.outputType === 'string' && node.output != "css") {
@@ -153,11 +161,18 @@
                   responseValue = convertColor.hsl.keyword(input);
                   break;
               }
-              if (node.outputType === 'object') {
+              if (node.outputType === 'object' && node.output === 'hsl') {
                 var obj = {
                   hue: responseValue[0],
                   saturation: responseValue[1],
                   lightness: responseValue[2]
+                };
+                responseValue = obj;
+              } else if (node.outputType === 'object' && node.output === 'rgb') {
+                var obj = {
+                  red: responseValue[0],
+                  green: responseValue[1],
+                  blue: responseValue[2]
                 };
                 responseValue = obj;
               } else if (node.outputType === 'string' && node.output != "css") {
