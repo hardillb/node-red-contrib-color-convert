@@ -19,6 +19,8 @@
         <option value="hsl">HSL</option>
         <option value="hsv">HSV</option>
         <option value="css">CSS</option>
+        <option value="hex">HEX</option>
+        
       </select>
   </div>
   <div class="form-row">
@@ -28,6 +30,8 @@
         <option value="hsl">HSL</option>
         <option value="hsv">HSV</option>
         <option value="css">CSS</option>
+        <option value="hex">HEX</option>
+        
       </select>
   </div>
   
@@ -55,6 +59,8 @@
     <li>HSL - Hue, Saturation, Level</li>
     <li>HSV - Hue, Saturation, Value (brightness)</li>
     <li>CSS - CSS color names</li>
+    <li>HEX - HEX value</li>
+    
   </ul>
   <h3>Inputs</h3>
   <p>For the first 3 input modes the node will attempt to determine the input format from the 3 following:</p>
@@ -66,12 +72,13 @@
   <code>value</code>,<code>brightness</code></li>
   </ul>
   For the CSS input msg.payload should be a string containing the name of a CSS color.</p>
+  <p>For HEX input msg.payload should be a HEX string including #</p>
   <p>For HSV and HSL inputs the "Scale Sat/Bri/Val" check box will convert values from 0-1 to 0-100</p>
   <h3>Outputs</h3>
   <p>Output type can be configured to be either a 3 element array, an object or a string.
   The 3 element array will contian the aproprate values in the same order as expected. Objects
   will have matching keys and the string will be the values from the array joined with a comma.</p>
-  <p>If the CSS output mode is selected then the output type will be forced to be a string.</p>
+  <p>If the CSS or HEX output mode is selected then the output type will be forced to be a string.</p>
 </script>
 
 <script type="text/javascript">
@@ -95,7 +102,7 @@
       },
       oneditprepare: function() {
         $('#node-input-output').change(function(){
-          if ($('#node-input-output option:selected').val() !== 'css') {
+          if ($('#node-input-output option:selected').val() !== 'css' && $('#node-input-output option:selected').val() !== 'hex') {
             $('#node-input-outputType').prop('disabled', false);
             //$('#node-input-outputType').val('array');
             console.log("foo")

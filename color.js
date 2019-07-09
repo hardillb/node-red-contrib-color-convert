@@ -88,6 +88,10 @@
                 case 'css':
                   responseValue = convertColor.rgb.keyword(input);
                   break;
+                case 'hex':
+                  responseValue = convertColor.rgb.hex(input);
+                  break;
+                   
               }
               if (node.outputType === 'object') {
                 var obj = {
@@ -96,8 +100,12 @@
                   blue: responseValue[2]
                 };
                 responseValue = obj;
-              } else if (node.outputType === 'string' && node.output != "css") {
+              } else if (node.outputType === 'string' && node.output != "css" && node.output != "hex") {
                 var str = responseValue.join(',');
+                responseValue = str;
+              }
+              else if (node.outputType === 'string' && node.output === "hex" ) {
+                var str = '#'+responseValue
                 responseValue = str;
               }
             } else {
@@ -122,6 +130,10 @@
                 case 'css':
                   responseValue = convertColor.hsv.keyword(input);
                   break;
+                case 'hex':
+                  responseValue = convertColor.hsv.hex(input);
+                  break;
+                   
               }
               if (node.outputType === 'object' && node.output === 'hsl') {
                 var obj = {
@@ -137,9 +149,13 @@
                   blue: responseValue[2]
                 };
                 responseValue = obj;
-              } else if (node.outputType === 'string' && node.output != "css") {
+              } else if (node.outputType === 'string' && node.output != "css" && node.output != "hex" ) {
                 var str = responseValue.join(',');
                 responseValue = str;
+              }
+              else if (node.outputType === 'string' && node.output === "hex") {
+                var str = responseValue
+                responseValue = '#'+str;
               }
             }
           } else {
@@ -160,6 +176,9 @@
                 case 'css':
                   responseValue = convertColor.hsl.keyword(input);
                   break;
+                case 'hex':
+                  responseValue = '#'+convertColor.hsl.hex(input);
+                
               }
               if (node.outputType === 'object' && node.output === 'hsl') {
                 var obj = {
@@ -175,8 +194,12 @@
                   blue: responseValue[2]
                 };
                 responseValue = obj;
-              } else if (node.outputType === 'string' && node.output != "css") {
+              } else if (node.outputType === 'string' && node.output != "css" && node.output != "hex") {
                 var str = responseValue.join(',');
+                responseValue = str;
+              }
+              else if (node.outputType === 'string' && node.output === "hex") {
+                var str = responseValue
                 responseValue = str;
               }
             }
@@ -197,8 +220,32 @@
               case 'hsv':
                 responseValue = convertColor.keyword.hsv(input);
                 break;
+              case 'hex':
+                responseValue = '#'+convertColor.keyword.hex(input);
+                break;
             }
-          } else {
+          } 
+          case 'hex':
+            if (typeof input === 'string') {
+
+              switch(node.output){
+              case 'rgb':
+                responseValue = convertColor.hex.rgb(input);
+                break;
+              case 'hsl':
+                responseValue = convertColor.hex.hsl(input);
+                break;
+              case 'hsv':
+                responseValue = convertColor.hex.hsv(input);
+                break;
+              case 'css':
+                responseValue = convertColor.hex.keyword(input);
+                break;
+              
+            } 
+            }
+
+          else {
             node.error("Input not a string");
             return;
           }
