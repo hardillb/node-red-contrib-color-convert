@@ -91,7 +91,6 @@
                 case 'hex':
                   responseValue = convertColor.rgb.hex(input);
                   break;
-                   
               }
               if (node.outputType === 'object') {
                 var obj = {
@@ -133,7 +132,6 @@
                 case 'hex':
                   responseValue = convertColor.hsv.hex(input);
                   break;
-                   
               }
               if (node.outputType === 'object' && node.output === 'hsl') {
                 var obj = {
@@ -178,7 +176,6 @@
                   break;
                 case 'hex':
                   responseValue = '#'+convertColor.hsl.hex(input);
-                
               }
               if (node.outputType === 'object' && node.output === 'hsl') {
                 var obj = {
@@ -227,24 +224,21 @@
           } 
           case 'hex':
             if (typeof input === 'string') {
-
               switch(node.output){
-              case 'rgb':
-                responseValue = convertColor.hex.rgb(input);
-                break;
-              case 'hsl':
-                responseValue = convertColor.hex.hsl(input);
-                break;
-              case 'hsv':
-                responseValue = convertColor.hex.hsv(input);
-                break;
-              case 'css':
-                responseValue = convertColor.hex.keyword(input);
-                break;
-              
-            } 
+                case 'rgb':
+                  responseValue = convertColor.hex.rgb(input);
+                  break;
+                case 'hsl':
+                  responseValue = convertColor.hex.hsl(input);
+                  break;
+                case 'hsv':
+                  responseValue = convertColor.hex.hsv(input);
+                  break;
+                case 'css':
+                  responseValue = convertColor.hex.keyword(input);
+                  break;
+              } 
             }
-
           else {
             node.error("Input not a string");
             return;
@@ -261,4 +255,4 @@
     });
   }
   RED.nodes.registerType("color-convert",convert);
-  }
+}
