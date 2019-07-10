@@ -221,25 +221,25 @@
                 responseValue = '#'+convertColor.keyword.hex(input);
                 break;
             }
-          } 
-          case 'hex':
-            if (typeof input === 'string') {
-              switch(node.output){
-                case 'rgb':
-                  responseValue = convertColor.hex.rgb(input);
-                  break;
-                case 'hsl':
-                  responseValue = convertColor.hex.hsl(input);
-                  break;
-                case 'hsv':
-                  responseValue = convertColor.hex.hsv(input);
-                  break;
-                case 'css':
-                  responseValue = convertColor.hex.keyword(input);
-                  break;
-              } 
-            }
-          else {
+          }
+          break; 
+        case 'hex':
+          if (typeof input === 'string') {
+            switch(node.output){
+              case 'rgb':
+                responseValue = convertColor.hex.rgb(input);
+                break;
+              case 'hsl':
+                responseValue = convertColor.hex.hsl(input);
+                break;
+              case 'hsv':
+                responseValue = convertColor.hex.hsv(input);
+                break;
+              case 'css':
+                responseValue = convertColor.hex.keyword(input);
+                break;
+            } 
+          } else {
             node.error("Input not a string");
             return;
           }
@@ -250,7 +250,7 @@
         msg.payload = responseValue;
         node.send(msg);
       } else {
-        node.error("no output");
+        node.error("no output, normally means bad input");
       }
     });
   }

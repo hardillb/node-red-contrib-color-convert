@@ -15,6 +15,7 @@ This node converts between different color representations, it can convert betwe
  - HSL - Hue, Saturation, Level
  - HSV - Hue, Saturation, Value (brightnes)
  - CSS - CSS color names
+ - HEX - A Hex RGB string #ff00ff
 
 ### Inputs
 
@@ -25,7 +26,7 @@ For the first 3 input modes the node will attempt to determine the input format 
  - a object with keys red,green,blue with values between 0-255.
  - a object with keys hue,saturation,lightness or value,brightness with values between 0-360 for hue and 0-100 for the others.
 
-For the CSS input mode the msg.payload should be a string containing the name of a CSS color.
+For the CSS or HEX input mode the msg.payload should be a string containing the name of a CSS color.
 
 For HSV and HSL inputs the "Scale Sat/Bri/Val" check box will convert values from 0-1 to 0-100
 
@@ -35,4 +36,4 @@ Output type can be configured to be either a 3 element array, an object or a str
 aproprate values in the same order as expected. Objects will have matching keys and the string will be the values from the 
 array joined with a comma.
 
-If the CSS output mode is selected then the output type will be forced to be a string.
+If the CSS or HEX output mode is selected then the output type will be forced to be a string.
