@@ -69,6 +69,10 @@
             array.push(input.red);
             array.push(input.green);
             array.push(input.blue);
+          } else if (input.hasOwnProperty("r") && input.hasOwnProperty("g") && input.hasOwnProperty("b")) {
+            array.push(input.r);
+            array.push(input.g);
+            array.push(input.b);
           }
         }
         input =  array;
@@ -79,6 +83,9 @@
           if (Array.isArray(input)) {
             if (input.length === 3) {
               switch(node.output){
+                case 'rgb':
+                  responseValue = input;
+                  break;
                 case 'hsv':
                   responseValue = convertColor.rgb.hsv(input);
                   break;
@@ -92,12 +99,26 @@
                   responseValue = convertColor.rgb.hex(input);
                   break;
               }
-              if (node.outputType === 'object') {
+              if (node.outputType === 'object' && node.output === 'rgb' ) {
                 var obj = {
                   red: responseValue[0],
                   green: responseValue[1],
                   blue: responseValue[2]
                 };
+                responseValue = obj;
+              } else if (node.outputType === 'object' && node.output === 'hsv' ) {
+                var obj = {
+                  hue: responseValue[0],
+                  saturation: responseValue[1],
+                  value: responseValue[2]
+                }
+                responseValue = obj;
+              } else if (node.outputType === 'object' && node.output === 'hsl' ) {
+                var obj = {
+                  hue: responseValue[0],
+                  saturation: responseValue[1],
+                  lightness: responseValue[2]
+                }
                 responseValue = obj;
               } else if (node.outputType === 'string' && node.output != "css" && node.output != "hex") {
                 var str = responseValue.join(',');
@@ -120,6 +141,9 @@
           if (Array.isArray(input)) {
             if (input.length === 3) {
               switch(node.output){
+                case 'hsv':
+                  responseValue = input;
+                  break;
                 case 'rgb':
                   responseValue = convertColor.hsv.rgb(input);
                   break;
@@ -134,6 +158,13 @@
                   break;
               }
               if (node.outputType === 'object' && node.output === 'hsl') {
+                var obj = {
+                  hue: responseValue[0],
+                  saturation: responseValue[1],
+                  lightness: responseValue[2]
+                };
+                responseValue = obj;
+              } else if (node.outputType === 'object' && node.output === 'hsv') {
                 var obj = {
                   hue: responseValue[0],
                   saturation: responseValue[1],
@@ -165,6 +196,9 @@
           if (Array.isArray(input)) {
             if (input.length === 3) {
               switch(node.output){
+                case 'hsl':
+                  responseValue = input;
+                  break;
                 case 'rgb':
                   responseValue = convertColor.hsl.rgb(input);
                   break;
@@ -182,6 +216,13 @@
                   hue: responseValue[0],
                   saturation: responseValue[1],
                   lightness: responseValue[2]
+                };
+                responseValue = obj;
+              } else if (node.outputType === 'object' && node.output === 'hsv') {
+                var obj = {
+                  hue: responseValue[0],
+                  saturation: responseValue[1],
+                  value: responseValue[2]
                 };
                 responseValue = obj;
               } else if (node.outputType === 'object' && node.output === 'rgb') {
