@@ -29,7 +29,7 @@
     this.scaleInput = n.scaleInput;
     var node = this;
 
-    node.on('input', function(msg){
+    node.on('input', function(msg, send, done){
 
       var responseValue;
 
@@ -129,11 +129,19 @@
                 responseValue = str;
               }
             } else {
-              node.error("Array wrong size");
+              if (done) {
+                done("Array wrong size");
+              } else {
+                node.error("Array wrong size", msg);
+              }
               return;
             }
           } else {
-            node.error("Input not an array");
+            if (done) {
+              done("Input not an array")
+            } else {
+              node.error("Input not an array", msg);
+            }
             return;
           }
           break;
@@ -188,7 +196,11 @@
               }
             }
           } else {
-            node.error("Input not an array");
+            if (done) {
+              done ("Input not an array")
+            } else {
+              node.error("Input not an array", msg);
+            }
             return;
           }
           break;
@@ -242,7 +254,11 @@
               }
             }
           } else {
-            node.error("Input not an array");
+            if (done) {
+              done("Input not an array")
+            } else {
+              node.error("Input not an array", msg);
+            }
             return;
           }
           break;
@@ -281,7 +297,11 @@
                 break;
             } 
           } else {
-            node.error("Input not a string");
+            if (done) {
+              done("Input not a string")
+            } else {
+              node.error("Input not a string", msg);
+            }
             return;
           }
           break;
@@ -289,9 +309,16 @@
 
       if (responseValue) {
         msg.payload = responseValue;
-        node.send(msg);
+        send(msg);
+        if (done) {
+          done()
+        }
       } else {
-        node.error("no output, normally means bad input");
+        if (done) {
+          done("no output, normally means bad input")
+        } else {
+          node.error("no output, normally means bad input", msg);
+        }
       }
     });
   }
