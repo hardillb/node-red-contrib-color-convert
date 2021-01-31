@@ -31,8 +31,9 @@
 
     node.on('input', function(msg, send, done){
 
-      var responseValue;
+      send = send || function() { node.send.apply(node,arguments) }
 
+      var responseValue;
       var input = msg.payload;
 
       if (!Array.isArray(input) && typeof input === 'object'){
